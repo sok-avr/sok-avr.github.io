@@ -1,0 +1,288 @@
+I"W3<p>We list the AVR tools and their status here, also list the reason why some could not be reproduced. Besides, we list the best practice for AVR artifact.</p>
+
+<ul>
+  <li><a href="#artifact-status">Artifact Status</a>
+<!-- - [The issues in Artifact Open Source](#the-issues-in-artifact-open-source) -->
+<!-- - [Recommendation Practice for AVR tools open source](#recommendation-practice-for-avr-tools-open-source) --></li>
+</ul>
+
+<h1 id="artifact-status">Artifact Status</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Tool</th>
+      <th style="text-align: center">Link</th>
+      <th style="text-align: center">Language</th>
+      <th style="text-align: center">Accessible</th>
+      <th style="text-align: center">Instruction</th>
+      <th style="text-align: center">Executable</th>
+      <th style="text-align: center">Reproducible</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">ErrDoc</td>
+      <td style="text-align: center"><a href="https://github.com/yuchi1989/ErrDoc">Tool</a>,     <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">◐</td>
+      <td style="text-align: center">/</td>
+      <td style="text-align: center">/</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">NPEFix</td>
+      <td style="text-align: center"><a href="https://github.com/SpoonLabs/npefix">Tool</a>,     <a href="">Paper</a></td>
+      <td style="text-align: center">Java</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">⬤</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">BovInspector</td>
+      <td style="text-align: center"><a href="https://github.com/BovInspector/project">Tool</a>, <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">◐</td>
+      <td style="text-align: center">/</td>
+      <td style="text-align: center">/</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">SAVER</td>
+      <td style="text-align: center"><a href="https://github.com/kupl/SAVER_public/">Tool</a>,  <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">❌</td>
+      <td style="text-align: center">⬤</td>
+      <td style="text-align: center">/</td>
+      <td style="text-align: center">/</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">IntPTI</td>
+      <td style="text-align: center"><a href="https://github.com/45258E9F/IntPTI">Tool</a>,  <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">⬤</td>
+      <td style="text-align: center">❌</td>
+      <td style="text-align: center">/</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">SGuard</td>
+      <td style="text-align: center"><a href="https://github.com/duytai/sGuard">Tool</a>,   <a href="">Paper</a></td>
+      <td style="text-align: center">Solidity</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">◐</td>
+      <td style="text-align: center">/</td>
+      <td style="text-align: center">/</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Elysium</td>
+      <td style="text-align: center"><a href="https://github.com/christoftorres/Elysium">Tool</a>,  <a href="">Paper</a></td>
+      <td style="text-align: center">Solidity</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">⬤</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">EVMPatch</td>
+      <td style="text-align: center"><a href="https://github.com/uni-due-syssec/evmpatch-developer-study">Tool</a>,<a href="">Paper</a></td>
+      <td style="text-align: center">Solidity</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">⬤</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Senx</td>
+      <td style="text-align: center">Ask from authors      <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">⬤</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">IntRepair</td>
+      <td style="text-align: center"><a href="https://github.com/TeamVault/IntRepair">Tool</a>, <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">◐</td>
+      <td style="text-align: center">/</td>
+      <td style="text-align: center">/</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">LeakFix</td>
+      <td style="text-align: center"><a href="https://sei.pku.edu.cn/gaoqing11/leakfix">Tool</a>, <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">❌</td>
+      <td style="text-align: center">◯</td>
+      <td style="text-align: center">/</td>
+      <td style="text-align: center">/</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Genprog</td>
+      <td style="text-align: center"><a href="https://github.com/squaresLab/genprog-code">Tool</a>,   <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">⬤</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Tan et al.</td>
+      <td style="text-align: center"><a href="https://anti-patterns.github.io/search-based-repair/">Tool</a>, <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">◯</td>
+      <td style="text-align: center">/</td>
+      <td style="text-align: center">/</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">DeFinery</td>
+      <td style="text-align: center"><a href="https://github.com/palinatolmach/DeFinery">Tool</a>,  <a href="">Paper</a></td>
+      <td style="text-align: center">Solidity</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">⬤</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">FixMorph</td>
+      <td style="text-align: center"><a href="https://fixmorph.github.io/">Tool</a>,    <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">⬤</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">PeachWeave</td>
+      <td style="text-align: center"><a href="https://github.com/rshariffdeen/PatchWeave">Tool</a>,  <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">⬤</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">FootPatch</td>
+      <td style="text-align: center"><a href="https://github.com/squaresLab/footpatch">Tool</a>,  <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">⬤</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">VulnFix</td>
+      <td style="text-align: center"><a href="https://github.com/yuntongzhang/vulnfix">Tool</a>,  <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">⬤</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">SemFix</td>
+      <td style="text-align: center"><a href="https://github.com/QIANZECHANG/SemFix">Tool</a>,   <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">◯</td>
+      <td style="text-align: center">/</td>
+      <td style="text-align: center">/</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Memfix</td>
+      <td style="text-align: center"><a href="http://prl.korea.ac.kr/MemFix">Tool</a>,       <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">❌</td>
+      <td style="text-align: center">◯</td>
+      <td style="text-align: center">/</td>
+      <td style="text-align: center">/</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">CPR</td>
+      <td style="text-align: center"><a href="https://cpr-tool.github.io/">Tool</a>,  <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">⬤</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ExtractFix</td>
+      <td style="text-align: center"><a href="https://extractfix.github.io/">Tool</a> ,   <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">⬤</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Symlog</td>
+      <td style="text-align: center"><a href="https://github.com/symlog/symlog">Tool</a>,  <a href="">Paper</a></td>
+      <td style="text-align: center">/</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">◐</td>
+      <td style="text-align: center">/</td>
+      <td style="text-align: center">/</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Nopol</td>
+      <td style="text-align: center"><a href="https://github.com/SpoonLabs/nopol/">Tool</a>,  <a href="">Paper</a></td>
+      <td style="text-align: center">Java</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">⬤</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Chida et al.</td>
+      <td style="text-align: center"><a href="https://github.com/NariyoshiChida/SP2022?">Tool</a>,   <a href="">Paper</a></td>
+      <td style="text-align: center">/</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">◯</td>
+      <td style="text-align: center">/</td>
+      <td style="text-align: center">/</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">LLM-Vul</td>
+      <td style="text-align: center"><a href="https://github.com/lin-tan/llm-vul">Tool</a>,           <a href="">Paper</a></td>
+      <td style="text-align: center">Java</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">⬤</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">VulRepair</td>
+      <td style="text-align: center"><a href="https://github.com/awsm-research/VulRepair">Tool</a>,   <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">◐</td>
+      <td style="text-align: center">/</td>
+      <td style="text-align: center">/</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">VRepair</td>
+      <td style="text-align: center"><a href="https://github.com/ASSERT-KTH/VRepair">Tool</a> ,    <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">◐</td>
+      <td style="text-align: center">/</td>
+      <td style="text-align: center">/</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">SeqTrans</td>
+      <td style="text-align: center"><a href="https://github.com/chijianlei/SeqTrans">Tool</a> , <a href="">Paper</a></td>
+      <td style="text-align: center">C/C++</td>
+      <td style="text-align: center">✅</td>
+      <td style="text-align: center">◐</td>
+      <td style="text-align: center">/</td>
+      <td style="text-align: center">/</td>
+    </tr>
+  </tbody>
+</table>
+
+:ET

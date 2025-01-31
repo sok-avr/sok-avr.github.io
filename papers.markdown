@@ -5,12 +5,30 @@ permalink: /papers/
 ---
 
 # 2024
+[TAPFixer: Automatic Detection and Repair of Home Automation Vulnerabilities based on Negated-property Reasoning](https://arxiv.org/html/2407.09095v1)
+
+Yinbo Yu, Yuanqi Xu, Kepu Huang, Jiajia Liu
+
+USENIX Security
+
+[Exploring ChatGPT's Capabilities on Vulnerability Management](https://www.usenix.org/system/files/usenixsecurity24-liu-peiyu.pdf)
+
+Peiyu Liu, Junming Liu, Lirong Fu, Kangjie Lu, Yifan Xia, Xuhong Zhang, Wenzhi Chen, Haiqin Weng, Shouling Ji, and Wenhai Wang
+
+USENIX Security
+
 
 [What IF Is Not Enough? Fixing Null Pointer Dereference With Contextual Check](https://www.usenix.org/conference/usenixsecurity24/presentation/xing-yunlong)
 
 Yunlong Xing, Shu Wang, Shiyu Sun, Xu He, Kun Sun, Qi Li
 
 USENIX Security
+
+[Out of Sight, Out of Mind: Better Automatic Vulnerability Repair by Broadening Input Ranges and Sources](https://dl.acm.org/doi/10.1145/3597503.3639222)
+
+Xin Zhou, Kisub Kim, Bowen Xu, Donggyun Han, David Lo
+
+ICSE
 
 [Code Security Vulnerability Repair Using Reinforcement Learning with Large Language Models](https://arxiv.org/abs/2401.07031)
 
@@ -36,8 +54,17 @@ Yu Nong, Mohammed Aldeen, Long Cheng, Hongxin Hu, Feng Chen, and Haipeng Cai
 
 Arxiv
 
+[A case study of llm for automated vulnerability repair: Assessing impact of reasoning and patch validation feedback](https://arxiv.org/abs/2405.15690)
 
+Kulsum, Ummay and Zhu, Haotian and Xu, Bowen and d'Amorim, Marcelo
 
+Arxiv
+
+[ContractTinker: LLM-Empowered Vulnerability Repair for Real-World Smart Contracts](https://arxiv.org/abs/2409.09661)
+
+Che Wang, Jiashuo Zhang, Jianbo Gao, Libin Xia, Zhi Guan, Zhong Chen
+
+Arxiv
 
 # 2023
 

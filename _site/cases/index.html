@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+  <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+
+  <style>
+  .oddrow {
+    background-color: rgb(250, 250, 234) !important;
+  }
+  
+  .evenrow {
+    background-color: rgb(229, 250, 253) !important;
+  }
+
+  .form-select-sm {
+    min-width: 50px;
+  }
+
+  .dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: white !important;
+    background-color: white;
+  }
+
+  .preprint {
+    color: gray !important;
+  }
+  
+  .preprint td {
+    color: gray !important;
+  }
+
+  .prob-span {
+    color: darkcyan;
+  }
+
+  .deter-span {
+    color: darkmagenta;
+  }
+  </style><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="SoK: Towards Effective Automated Vulnerability Repair" />
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">SoK: Towards Effective Automated Vulnerability Repair</a>
+    <title>SoK: Towards Effective Automated Vulnerability Repair</title><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="def-page-link" href="/cases/">Cases</a><a class="def-page-link" href="/papers/">Papers</a><a class="def-page-link" href="/avr-tools/">Tools</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- ### <font color="red">ToDO</font>: Add Cases that the current methods can/can't repair, for future directions, also demonstrate cases -->
+
+<blockquote>
+  <p>In addition to the cases we listed in the paper, we also analyzed some cases here to show current prevalent LLMs good at what kinds of vulnerabilities and how could we enhance its effectiveness. This not only include the data in our benchmark but also some failure cases in others’ AVR work.</p>
+</blockquote>
+
+<ul>
+  <li><a href="#summarized-cases-that-learning-based-methods-can-repair">Summarized cases that learning-based methods can repair</a></li>
+  <li><a href="#summarized-cases-that-learning-based-methods-cannot-repair">Summarized cases that learning-based methods cannot repair</a></li>
+  <li><a href="#summarized-cases-that-non-learning-based-methods-can-repair">Summarized cases that non-learning-based methods can repair</a></li>
+  <li><a href="#summarized-cases-that-non-learning-based-methods-cannot-repair">Summarized cases that non-learning-based methods cannot repair</a></li>
+  <li><a href="#summary">Summary</a></li>
+  <li><a href="#hybrid-approach-will-enhance-avr">Hybrid approach will enhance AVR</a></li>
+</ul>
+
+<h2 id="summarized-cases-that-learning-based-methods-can-repair">Summarized cases that learning-based methods can repair</h2>
+
+<p><strong>1. For vulnerabilities with explicit patterns(e.g., security usage of APIs)</strong></p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//VUL4J-35</span>
+@@ -51,7 +52,7 @@ public class TokenHelper {
+     */
+    public static final String TOKEN_NAME_FIELD = "struts.token.name";
+    private static final Logger LOG = LoggerFactory.getLogger(TokenHelper.class);
+<span class="gd">-    private static final Random RANDOM = new Random();
+</span><span class="gi">+    private static final Random RANDOM = new SecureRandom();
+</span></code></pre></div></div>
+<p>The LLM generate this fix because such patterns often involve widely recommended best practices, such as replacing <code class="language-plaintext highlighter-rouge">Random</code> with <code class="language-plaintext highlighter-rouge">SecureRandom</code> in security-sensitive contexts. Also, such fix don’t need to consider too much about the dependencies. VUL4J-71 is also such a repair.</p>
+
+<p>VUL4J-51 is also similar:</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -84,9 +84,7 @@</span> public Collection&lt;FileAnnotation&gt; parse(InputStream file, String moduleName)
+	}
+
+	private Ccm parseCCMXmlFile(InputStream ccmXmlFile) throws IOException, SAXException {
+<span class="gd">-		Digester digester = new Digester();
+-		digester.setValidating(false);
+-		digester.setClassLoader(CcmParser.class.getClassLoader());
+</span><span class="gi">+		SecureDigester digester = new SecureDigester(CcmParser.class);
+</span>
+		String rootXPath = "ccm";
+		digester.addObjectCreate(rootXPath, Ccm.class);
+</code></pre></div></div>
+
+<p><strong>2. Built-in Features</strong></p>
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -238,7 +238,7 @@</span> private boolean prefersSeekableByteChannel(String format) {
+    //VUL4J-5
+    private void expand(ArchiveEntrySupplier supplier, EntryWriter writer, File targetDirectory)
+        throws IOException {
+<span class="gd">-        String targetDirPath = targetDirectory.getCanonicalPath();
+</span><span class="gi">+        String targetDirPath = targetDirectory.getCanonicalPath() + File.separatorChar;
+</span>        ArchiveEntry nextEntry = supplier.getNextReadableEntry();
+        while (nextEntry != null) {
+            File f = new File(targetDirectory, nextEntry.getName());
+
+</code></pre></div></div>
+
+<p>Analysis: <code class="language-plaintext highlighter-rouge">targetDirectory.getCanonicalPath()</code> was used to get the canonical path of the target directory, but the path was directly concatenated with the file name without ensuring there was a proper path separator(<code class="language-plaintext highlighter-rouge">\</code> or <code class="language-plaintext highlighter-rouge">/</code>), if the <code class="language-plaintext highlighter-rouge">targetDirectory</code> path did not end with a separator, this could lead to incorrect file paths, potentially causing exceptions or even security risks such as directory traversal attacks. The fix involved appending <code class="language-plaintext highlighter-rouge">File.separatorChar</code> to the canonical path of targetDirectory. The fix is related to Java’s built-in features <code class="language-plaintext highlighter-rouge">File.separatorChar</code>, for LLMs such explicit features that related to built-feature/library sometimes is easy to be fixed. But also due to such explicit pattern, for deep learning or other methods, they are also easy to be fixed.</p>
+
+<p>VUL4J-79(CVE-2018-1002201) is also similar cases:</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -1150,6 +1150,15 @@</span> public void process(InputStream in, ZipEntry zipEntry) throws IOException {
+      String name = mapper.map(zipEntry.getName());
+      if (name != null) {
+        File file = new File(outputDir, name);
+
+       
+<span class="gi">+        if (name.indexOf("..") != -1 &amp;&amp; !file.getCanonicalPath().startsWith(outputDir.getCanonicalPath())) {
++          throw new ZipException("The file "+name+" is trying to leave the target output directory of "+outputDir+". Ignoring this file.");
++        }
+</span>
+        if (zipEntry.isDirectory()) {
+          FileUtils.forceMkdir(file);
+        }
+</code></pre></div></div>
+
+<p>VJBench-Halo1 is also similar, which has been fixed successfully</p>
+
+<pre><code class="language-DIFF">@@ -296,7 +296,7 @@ public static void checkDirectoryTraversal(@NonNull Path parentPath, @NonNull Pa
+        Assert.notNull(parentPath, "Parent path must not be null");
+        Assert.notNull(pathToCheck, "Path to check must not be null");
+
+-        if (pathToCheck.startsWith(parentPath.normalize())) {
++        if (pathToCheck.normalize().startsWith(parentPath)) {
+            return;
+        }
+</code></pre>
+
+<p><strong>3. Simple changes, short context</strong></p>
+
+<p>For example, <a href="https://github.com/apache/commons-imaging/commit/6a79d35d6654d895d0a4b73b3a9282ec9aaeeb06">CVE-2018-17202</a>:</p>
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//VUL4J-12</span>
+@@ -400,7 +400,7 @@ private static int fastRound(final float x) {
+    private int extend(int v, final int t) {
+
+        int vt = (1 &lt;&lt; (t - 1));
+<span class="gd">-        while (v &lt; vt) {
+</span><span class="gi">+        if (v &lt; vt) {
+</span>            vt = (-1 &lt;&lt; t) + 1;
+            v += vt;
+        }
+        return v;
+    }
+</code></pre></div></div>
+<p>Analysis: The change mainly transform the <code class="language-plaintext highlighter-rouge">while</code> loop to <code class="language-plaintext highlighter-rouge">if</code> condition, This could be repaired by GPT4, CodeT5, and Fine-tuned Incoder.  In the original code, if the input parameter <code class="language-plaintext highlighter-rouge">v</code> is very small, then <code class="language-plaintext highlighter-rouge">while (v &lt; vt)</code> may always be <code class="language-plaintext highlighter-rouge">true</code>, potentially cause infinit loop. So make this simple change. However, the root cause of this vulnerability is mainly the <strong>misunderstanding of <a href="https://www.w3.org/Graphics/JPEG/itu-t81.pdf">JEPG Sign Extension Standard Section F2.2.1</a></strong>, where the specification means <em>Each decoded value needs to be sign-extended <strong>at most once</strong></em>. Whereas this constraint should be get from <em>Figure F.12</em> in the specification. However, even though the models describe above have fixed this, this may because the fix is not complex, and when given the CWE type in the prompt, such fix could be guessed successfully. If there are very long context, the models may not take effective. In this case, we advocate <strong>Better specification Genration</strong>, from the document, the expression are diverse, figures, text, etc. Better specification with the vulnerable code will be better for LLM driven AVR.</p>
+
+<p><a href="https://github.com/apache/commons-imaging/commit/6a79d35d6654d895d0a4b73b3a9282ec9aaeeb06">Vul4J-20</a>(CVE-2018-11797) also belongs to this type <strong>Simple changes, short context</strong>, which can be repaired by GPT-4 in our experiment</p>
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -534,9 +534,11 @@</span> public void setNeedToBeUpdated(boolean flag)
+    public float[] toFloatArray()
+    {
+        float[] retval = new float[size()];
+        for (int i = 0; i &lt; size(); i++)
+        {
+<span class="gd">-            retval[i] = ((COSNumber)getObject( i )).floatValue();
+</span><span class="gi">+            COSBase base = getObject(i);
++            retval[i] =
++                base instanceof COSNumber ? ((COSNumber) base).floatValue() : 0;
+</span>        }
+        return retval;
+    }
+</code></pre></div></div>
+
+<h2 id="summarized-cases-that-learning-based-methods-cannot-repair">Summarized cases that learning-based methods cannot repair</h2>
+
+<p><strong>1. The vulerability fix should take logic into consideration, however, learning based methods know nothing about with the specification of the vul</strong></p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//CVE-2019-3775</span>
+@@ -38,6 +38,10 @@ public boolean isAllowed(HttpServletRequest request) throws IOException {
+            return false;
+        }
+
++        if (!scimUserFromDb.getEmails().containsAll(scimUserFromRequest.getEmails())) {
+<span class="gi">+            return false;
++        }
+</span>
+        if (!scimUserFromDb.getUserName().equals(scimUserFromRequest.getUserName())) {
+            return false;
+        }
+</code></pre></div></div>
+
+<p>Analysis: This vulnerability is due to improper authentication. This patch adds email validation logic to prevent users from updating their email addresses themselves, thereby increasing the security of the system and ensuring that email changes must be performed by authorized entities. However, for learning-based methods, they lack the understanding of the whole code intention, and specifications for this logic. So it is almost impossible for it to implement such fix.</p>
+
+<p><strong>2. The fix need to consider about inter-procedural dependency</strong></p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//VUL4J-53</span> (CVE-2018-1999044)
+<span class="p">@@ -204,7 +204,7 @@</span> void addTo(Calendar c, int i) {
+        }
+
+        void setTo(Calendar c, int i) {
+<span class="gd">-            c.set(field,i-offset);
+</span><span class="gi">+            c.set(field,Math.min(i-offset, c.getActualMaximum(field)));
+</span>        }
+
+        void clear(Calendar c) {
+</code></pre></div></div>
+<p>Analysis:
+<code class="language-plaintext highlighter-rouge">Math.min(i - offset, c.getActualMaximum(field))</code> is used to ensure that calculations or value settings do not exceed the allowed boundaries, the system can prevent endless loops. However, for learning based methods, they don’t know the restriction, and also which function could be called to fix it, i.e., lack understanding for code dependency and logic.</p>
+
+<p><strong>3. Single Line Change does not mean simple change</strong></p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//Vul4J-54,</span> CVE-2017-1000355
+<span class="p">@@ -145,6 +145,9 @@</span> private void init() {
+        // list up types that should be marshalled out like a value, without referential integrity tracking.
+        addImmutableType(Result.class);
+
++        denyTypes(new Class[] { void.class, Void.class });
+
+        registerConverter(new RobustCollectionConverter(getMapper(),getReflectionProvider()),10);
+        registerConverter(new RobustMapConverter(getMapper()), 10);
+        registerConverter(new ImmutableMapConverter(getMapper(),getReflectionProvider()),10);
+</code></pre></div></div>
+
+<p>Analysis: Feeding XStream with specially crafted XML can cause the JVM to crash, leading to a Denial of Service DoS attack. This occurs when the XML contains type information that directs XStream to create an instance of the <strong>primitive void</strong> type, which cannot have instances. So the fix is to explicitly blocks XStream from handling <code class="language-plaintext highlighter-rouge">void.class</code> and <code class="language-plaintext highlighter-rouge">Void.class</code>.  Though the fix is only one line, if the <strong>root cause</strong> of this vulnerability is unclear, even though feed LLMs with vulnerable function, fix location, and CWE type, it’s still not helpful.</p>
+
+<p>Other examples that single line change with complex spec/logic/depedency</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//VUL4J-57</span> (CVE-2018-1000089)
+<span class="p">@@ -63,6 +60,7 @@</span> public boolean start() throws Exception {
+        if (item == null) {
+            throw new AbortException("No item named " + job + " found");
+        }
+<span class="gi">+        item.checkPermission(Item.BUILD);
+</span>        if (step.getWait() &amp;&amp; !(item instanceof Job)) {
+            // TODO find some way of allowing ComputedFolders to hook into the listener code
+            throw new AbortException("Waiting for non-job items is not supported");
+</code></pre></div></div>
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//VUL4J-62</span> (CVE-2018-18389)
+<span class="p">@@ -232,6 +232,9 @@</span> private LdapContext getLdapContextUsingStartTls( LdapContextFactory ldapContextF
+            ctx.addToEnvironment( Context.SECURITY_PRINCIPAL, principal );
+            ctx.addToEnvironment( Context.SECURITY_CREDENTIALS, credentials );
+
++            // do a lookup of the user to trigger authentication
+<span class="gi">+            ctx.lookup( principal.toString() );
++
+</span>            return ctx;
+        }
+        catch ( IOException e )
+</code></pre></div></div>
+
+<p><strong>4. Not straightforward control structures changes</strong></p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//VUL4J-63</span> CVE-2018-1000615
+<span class="p">@@ -50,20 +50,30 @@</span> public static void versionMatch(String version) {
+     * @return an int number
+     */
+    public static int versionCompare(String fromVersion, String toVersion) {
+<span class="gi">+        if (fromVersion == null || toVersion == null) {
++            return -1;
++        }
+</span>        String[] fromArr = fromVersion.split("\\.");
+        String[] toArr = toVersion.split("\\.");
+<span class="gd">-        int fromFirst = Integer.parseInt(fromArr[0]);
+-        int fromMiddle = Integer.parseInt(fromArr[1]);
+-        int fromEnd = Integer.parseInt(fromArr[2]);
+-        int toFirst = Integer.parseInt(toArr[0]);
+-        int toMiddle = Integer.parseInt(toArr[1]);
+-        int toEnd = Integer.parseInt(toArr[2]);
+-       if (fromFirst - toFirst != 0) {
+-            return fromFirst - toFirst;
+-        } else if (fromMiddle - toMiddle != 0) {
+-            return fromMiddle - toMiddle;
+-        } else {
+-            return fromEnd - toEnd;
+</span><span class="gi">+        if (fromArr.length != 3 || toArr.length != 3) {
++            return -1;
++        }
++        try {
++            int fromFirst = Integer.parseInt(fromArr[0]);
++            int fromMiddle = Integer.parseInt(fromArr[1]);
++            int fromEnd = Integer.parseInt(fromArr[2]);
++            int toFirst = Integer.parseInt(toArr[0]);
++            int toMiddle = Integer.parseInt(toArr[1]);
++            int toEnd = Integer.parseInt(toArr[2]);
++            if (fromFirst - toFirst != 0) {
++                return fromFirst - toFirst;
++            } else if (fromMiddle - toMiddle != 0) {
++                return fromMiddle - toMiddle;
++            } else {
++                return fromEnd - toEnd;
++            }
++        } catch (NumberFormatException nfe) {
++            return -1;
+</span>        }
+    }
+<span class="err">}</span>   
+</code></pre></div></div>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -271,11 +271,6 @@</span> public void startElement(QName element, XMLAttributes attributes, Augmentations
+
+			boolean isStyle = "style".endsWith(element.localpart);
+
+-			if (isStyle) {
+<span class="gd">-				this.operations.push(Ops.CSS);
+-				cssContent = new StringBuffer();
+-				cssAttributes = attributes;
+-			} else {
+</span>				// validate all attributes, we need to do this now to find out
+				// how to deal with the element
+				boolean removeTag = false;
+<span class="p">@@ -352,6 +347,10 @@</span> public void startElement(QName element, XMLAttributes attributes, Augmentations
+
+				if (removeTag) {
+					this.operations.push(Ops.REMOVE);
+<span class="gi">+				} else if (isStyle) {
++					this.operations.push(Ops.CSS);
++					cssContent = new StringBuffer();
++					cssAttributes = validattributes;
+</span>				} else if (filterTag) {
+					this.operations.push(Ops.FILTER);
+				} else {
+</code></pre></div></div>
+<h2 id="summarized-cases-that-non-learning-based-methods-can-repair">Summarized cases that non-learning-based methods can repair</h2>
+
+<blockquote>
+  <p>The types of vulnerabilities that can be repaired by non-learning-based methods depend on the design of these methods, which are more transparent than learning-based methods. Here, we only list some cases where non-learning-based methods can repair vulnerabilities but learning-based methods cannot.</p>
+</blockquote>
+
+<p><strong>1. Dependent with Macros, global variables, unobtainable structure members, etc.</strong></p>
+
+<ul>
+  <li>Case 1: CVE-2012-2806</li>
+</ul>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -323,14 +323,15 @@</span> get_sos (j_decompress_ptr cinfo)
+
+  /* Collect the component-spec parameters */
+
+-  for (i = 0; i &lt; cinfo-&gt;num_components; i++)
+<span class="gi">+  for (i = 0; i &lt; MAX_COMPS_IN_SCAN; i++)
+</span>    cinfo-&gt;cur_comp_info[i] = NULL;
+
+  for (i = 0; i &lt; n; i++) {
+    INPUT_BYTE(cinfo, cc, return FALSE);
+    INPUT_BYTE(cinfo, c, return FALSE);
+
+-    for (ci = 0, compptr = cinfo-&gt;comp_info; ci &lt; cinfo-&gt;num_components;
+<span class="gi">+    for (ci = 0, compptr = cinfo-&gt;comp_info;
++	    ci &lt; cinfo-&gt;num_components &amp;&amp; ci &lt; MAX_COMPS_IN_SCAN;
+</span>	    ci++, compptr++) {
+      if (cc == compptr-&gt;component_id &amp;&amp; !cinfo-&gt;cur_comp_info[ci])
+	goto id_found;
+</code></pre></div></div>
+
+<p>Analysis: The root cause of the vulnerability is the use of <code class="language-plaintext highlighter-rouge">cinfo-&gt;num_components</code> as the loop boundary without validation. This value, provided by the input JPEG file, is potentially be set to an arbitrary number. Consequently, the loop might iterate beyond the bounds of allocated memory, leading to a heap-based buffer overflow. To repair this vulnerability, it needs to take the macro <code class="language-plaintext highlighter-rouge">MAX_COMPS_IN_SCAN</code> into consideration, which defines the maxium number of components the program can safely handle.  Changing the loop condition accordingly prevents overflow. While learning-based methods miss such critical macros. The non-learning based methods can synthesize correct patch with the correct constraint extracted during fuzzing.</p>
+
+<p>Case-2: <a href="https://github.com/jasper-software/jasper/commit/d8c2604cd438c41ec72aff52c16ebd8183068020">CVE-2016-8691</a></p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -512,6 +512,16 @@</span> static int jpc_siz_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate,
+			jas_free(siz-&gt;comps);
+			return -1;
+		}
+<span class="gi">+		if (siz-&gt;comps[i].hsamp == 0 || siz-&gt;comps[i].hsamp &gt; 255) {
++			jas_eprintf("invalid XRsiz value %d\n", siz-&gt;comps[i].hsamp);
++			jas_free(siz-&gt;comps);
++			return -1;
++		}
++		if (siz-&gt;comps[i].vsamp == 0 || siz-&gt;comps[i].vsamp &gt; 255) {
++			jas_eprintf("invalid YRsiz value %d\n", siz-&gt;comps[i].vsamp);
++			jas_free(siz-&gt;comps);
++			return -1;
++		}
+</span>		siz-&gt;comps[i].sgnd = (tmp &gt;&gt; 7) &amp; 1;
+		siz-&gt;comps[i].prec = (tmp &amp; 0x7f) + 1;
+	}
+</code></pre></div></div>
+
+<p>Analysis: The root cause of the vulnerability lies in the lack of boundary checks for the horizontal sampling factor (hsamp) and vertical sampling factor (vsamp). If there is not such check, the value could be 0 or greater than 255, may leading to division by zero and application crash. To fix this, the member in structure <code class="language-plaintext highlighter-rouge">jpc_siz_t</code>and <code class="language-plaintext highlighter-rouge">jpc_sizcomp_t</code> must be considered, otherwise, it is possible for a correct repair. For learning based methods, only with a vulnerable function takes no effect. For non-learning based methods, e.g., Vulnfix, according to fuzzing, to extract invariant, constraint, which take the necessary dependency into consideration, performing a correct repair.</p>
+
+<p>Case-3: <a href="https://github.com/libjpeg-turbo/libjpeg-turbo/commit/9c78a04df4e44ef6487eee99c4258397f4fdca55">CVE-2018-14498</a></p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -72,6 +72,7 @@</span> typedef struct _bmp_source_struct {
+  JDIMENSION row_width;         /* Physical width of scanlines in file */
+
+  int bits_per_pixel;           /* remembers 8- or 24-bit format */
+<span class="gi">+  int cmap_length;              /* colormap length */
+</span>
+  boolean use_inversion_array;  /* TRUE = preload the whole image, which is
+                                   stored in bottom-up order, and feed it to
+<span class="p">@@ -155,6 +156,7 @@</span> get_8bit_row(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
+<span class="err">{</span>
+  bmp_source_ptr source = (bmp_source_ptr)sinfo;
+  register JSAMPARRAY colormap = source-&gt;colormap;
+<span class="gi">+  int cmaplen = source-&gt;cmap_length;
+</span>  JSAMPARRAY image_ptr;
+  register int t;
+  register JSAMPROW inptr, outptr;
+<span class="p">@@ -178,11 +180,15 @@</span> get_8bit_row(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
+  if (cinfo-&gt;in_color_space == JCS_GRAYSCALE) {
+    for (col = cinfo-&gt;image_width; col &gt; 0; col--) {
+      t = GETJSAMPLE(*inptr++);
+<span class="gi">+      if (t &gt;= cmaplen)
++        ERREXIT(cinfo, JERR_BMP_OUTOFRANGE);
+</span>      *outptr++ = colormap[0][t];
+    }
+</code></pre></div></div>
+
+<p>This is the fix on structure, and also add condition check in the file, which is much more complex, Extractfix could generate plausible patch, though not totally same. While learning based methods, could not.</p>
+
+<h2 id="summarized-cases-that-non-learning-based-methods-cannot-repair">Summarized cases that non-learning-based methods cannot repair</h2>
+
+<p><strong>Case-1: Gnubug-26545</strong></p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -287,7 +287,7 @@</span> fillpattern (int type, unsigned char *r, size_t size)
+  r[0] = (bits &gt;&gt; 4) &amp; 255;
+  r[1] = (bits &gt;&gt; 8) &amp; 255;
+  r[2] = bits &amp; 255;
+<span class="gd">-  for (i = 3; i &lt; size / 2; i *= 2)
+</span><span class="gi">+  for (i = 3; i &lt;= size / 2; i *= 2)
+</span>    memcpy (r + i, r, i);
+  if (i &lt; size)
+    memcpy (r + i, r, size - i);
+</code></pre></div></div>
+<p>non learning based methods fix this, but learning based method could repair.</p>
+
+<p><strong>Case-2: CVE-2016-9273</strong></p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -63,6 +63,15 @@</span> TIFFNumberOfStrips(TIFF* tif)
+	TIFFDirectory *td = &amp;tif-&gt;tif_dir;
+	uint32 nstrips;
+
++    if( td-&gt;td_nstrips )
+<span class="gi">+        return td-&gt;td_nstrips;
+</span>
+	nstrips = (td-&gt;td_rowsperstrip == (uint32) -1 ? 1 :
+	     TIFFhowmany_32(td-&gt;td_imagelength, td-&gt;td_rowsperstrip));
+	if (td-&gt;td_planarconfig == PLANARCONFIG_SEPARATE)
+</code></pre></div></div>
+<p>In this case, the vulnerability fix is a single-hunk fix and only has two lines of code addition. However, it <strong>cannot be repaired by both learning and non-learning methods</strong>. The root of the vulnerability lies in the reliance on the cached value of <code class="language-plaintext highlighter-rouge">td-&gt;td_nstrips</code>, This value is calculated when the strip count is first needed, based on the image’s length and the rows per strip. However, if the structure of the image changes afterward in another function, the cached value becomes outdated, leading to inconsistencies. The vulnerability emerges because there is no mechanism to ensure that the cached. <code class="language-plaintext highlighter-rouge">td-&gt;td_nstrips</code> value is updated when the underlying image structure changes. For learning-based methods, it has no context, no information about the <code class="language-plaintext highlighter-rouge">td</code> member, and unclear about the root cause of this vulnerability, so it’s hard to repair. For non-learning based methods, wrong constraints, and wrong localization lead to no successul repair. As analyzed in this case, although the change is 2 lines of code, it still has a complex logic.</p>
+
+<h2 id="summary">Summary</h2>
+<ol>
+  <li>Though very simple changes, the vulnerability logic could be very complex. So in this case, it is hard to fix by both learning and non-learning based methods. The focus should be on how to determine the root cause of the vulnerability, and for constraints, invariants inference, etc, instead of totally rely on learning based methods in the first step, because in most situation, they only have limited context.</li>
+  <li>The vulnerability on C/C++ in more on memory bugs, however, for Java, it’s a memory-safe language, most of its vulnerability are on the application-layer, could have more logic vulnerability, which has low RSR(as shown in our paper).</li>
+  <li>In AVR, there is currently no method that has an absolute advantage.</li>
+</ol>
+
+<h2 id="hybrid-approach-will-enhance-avr">Hybrid approach will enhance AVR</h2>
+
+<p>For exmaple, <code class="language-plaintext highlighter-rouge">CVE-2022-1674</code>
+This vulnerability could not be repair by SOTA NPDs repair tool <a href="https://www.usenix.org/system/files/usenixsecurity24-xing-yunlong.pdf">CONCH</a> due to <em>Unobtainable Member</em>, when directly feed this into LLM with CWE type, fix location, vulnerable function, it could not be repaired, either. However, when given the structure of regmatch_T. LLM(specifically, gpt-4) could perform a correct repair.  So in this case, the thing we should do is to use like program analysis to obtain its structure, and together with LLM to fix. Similar cases that we mentioned above could also be repaired using this.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -2932,7 +2932,7 @@</span> buflist_match(
+
+    // First try the short file name, then the long file name.
+    match = fname_match(rmp, buf-&gt;b_sfname, ignore_case);
+<span class="gd">-    if (match == NULL)
+</span><span class="gi">+    if (match == NULL &amp;&amp; rmp-&gt;regprog != NULL)
+</span>	match = fname_match(rmp, buf-&gt;b_ffname, ignore_case);
+
+    return match;
+</code></pre></div></div>
+
+<p>Except static program analysis, other dynamic analysis could also be used, like fuzzing, we could extract the constraint from the trace.</p>
+
+<p>Also, other information, e.g., specifications, code comments may also be helpful to fix the vulnerability(Please see what we discussed in paper in Section 5.2).</p>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <!-- <div class="footer-col"> -->
+        <!-- <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p> -->
+      <!-- </div> -->
+      <div class="footer-col">
+       
+      </div>
+      <div class="footer-col">
+        <p>This is the website for SoK: Towards Effective Automated Vulnerability Repair</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

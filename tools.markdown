@@ -4,11 +4,11 @@ title: Tools
 permalink: /avr-tools/
 ---
 
-We list the AVR tools and their status here, also list the reason why some could not be reproduced. Besides, we list the best practice for AVR artifact.
+<!-- We list the AVR tools and their status here, also list the reason why some could not be reproduced. Besides, we list the best practice for AVR artifact. -->
 
 - [Artifact Status](#artifact-status)
-- [The issues in Artifact Open Source](#the-issues-in-artifact-open-source)
-- [Recommendation Practice for AVR tools open source](#recommendation-practice-for-avr-tools-open-source)
+<!-- - [The issues in Artifact Open Source](#the-issues-in-artifact-open-source) -->
+<!-- - [Recommendation Practice for AVR tools open source](#recommendation-practice-for-avr-tools-open-source) -->
 
 
 # Artifact Status 

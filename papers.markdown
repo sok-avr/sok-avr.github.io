@@ -3,6 +3,18 @@ layout: default
 title: Papers
 permalink: /papers/
 ---
+# 2025
+[Usenix Security] [PATCHAGENT: A Practical Program Repair Agent Mimicking Human Expertise](https://www.usenix.org/system/files/usenixsecurity25-yu-zheng.pdf)
+
+[Usenix Security] [Logs In, Patches Out: Automated Vulnerability Repair via Tree-of-Thought LLM Analysis](https://www.usenix.org/system/files/usenixsecurity25-kim-youngjoon.pdf)
+
+[Usenix Security] [SoK: Automated Vulnerability Repair: Methods, Tools, and Assessments](https://www.usenix.org/system/files/usenixsecurity25-hu-yiwei.pdf)
+
+[Usenix Security] [SoK: Towards Effective Automated Vulnerability Repair](https://www.usenix.org/system/files/usenixsecurity25-li-ying.pdf)
+
+[Usenix Security] [AppAtch: Automated Adaptive Prompting Large Language Models for Real-World Software Vulnerability Patching](https://www.usenix.org/system/files/usenixsecurity25-nong.pdf)
+
+[ICSE 2025] [Closing the Gap: A User Study on the Real-world Usefulness of AI-powered Vulnerability Detection & Repair in the IDE](https://arxiv.org/abs/2412.14306)
 
 # 2024
 [TAPFixer: Automatic Detection and Repair of Home Automation Vulnerabilities based on Negated-property Reasoning](https://arxiv.org/html/2407.09095v1)
